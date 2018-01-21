@@ -1,12 +1,21 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ * @flow
+ */
 
-export default class App extends React.Component {
+import React, {Component} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+
+
+export default class App extends Component<{}> {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Google Calendar Events Browser</Text>
-      </View>
+        <View style={styles.container}>
+          <Text style={styles.welcome}>
+            Google Calendar Events Browser
+          </Text>
+        </View>
     );
   }
 }
@@ -14,8 +23,13 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
   },
+  welcome: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  }
 });
