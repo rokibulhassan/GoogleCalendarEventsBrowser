@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import EventListItemList from './event.list.item';
+import EventItem from './event.item';
 
-export default class EventListItem extends Component {
+export default class EventItemList extends Component {
 
 
   render() {
@@ -13,7 +13,12 @@ export default class EventListItem extends Component {
             <Text style={styles.title}> Time </Text>
             <Text style={styles.title}> Description </Text>
           </View>
-          <EventListItemList></EventListItemList>
+          {this.props.calendarEventsItems.map((event) =>
+              <EventItem
+                  key={event.id}
+                  event={event}
+              />
+          )}
         </View>
     );
   }

@@ -1,15 +1,15 @@
 import React, {Component} from 'react';
 import {StyleSheet, Text, View} from 'react-native';
 
-export default class EventListItemList extends Component {
+export default class EventItem extends Component {
 
 
   render() {
 
     return (
         <View style={styles.container}>
-          <Text> 10:50 AM </Text>
-          <Text> Meeting with Tom </Text>
+          <Text> {this.props.event.start.date} </Text>
+          <Text> {this.props.event.description} </Text>
         </View>
     );
   }

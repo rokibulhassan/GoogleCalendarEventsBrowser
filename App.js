@@ -5,16 +5,29 @@
  */
 
 import React, {Component} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
+import EventItemList from './components/event.item.list'
+import calendarEventsListService from './serivces/calendar.events.list.service'
 
 
 export default class App extends Component<{}> {
+
+  state = {
+    calendarEvents: {},
+    calendarEventsItems: []
+  }
+
+  componentDidMount = () => {
+    this.setState({
+      calendarEvents: calendarEventsListService(),
+      calendarEventsItems: calendarEventsListService().items,
+    })
+  }
+
   render() {
     return (
         <View style={styles.container}>
-          <Text style={styles.welcome}>
-            Google Calendar Events Browser
-          </Text>
+          <EventItemList calendarEventsItems={this.state.calendarEventsItems}/>
         </View>
     );
   }
