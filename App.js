@@ -33,8 +33,7 @@ export default class App extends Component<{}> {
         <GoogleSigninButton
           style={{width: 48, height: 48}}
           size={GoogleSigninButton.Size.Icon}
-          color={GoogleSigninButton.Color.Dark}
-          onPress={this._signIn.bind(this)}/>
+          color={GoogleSigninButton.Color.Dark}/>
     );
   }
 }
