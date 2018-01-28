@@ -7,11 +7,12 @@
 import React, {Component} from 'react';
 import {StyleSheet, View} from 'react-native';
 import EventItemList from './components/event.item.list'
+import GoogleLogin from './components/GoogleLogin'
 import calendarEventsListService from './serivces/calendar.events.list.service'
 import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
 
 
-export default class App extends Component<{}> {
+export default class App extends Component {
 
   state = {
     calendarEvents: {},
@@ -30,10 +31,7 @@ export default class App extends Component<{}> {
         // <View style={styles.container}>
         //   <EventItemList calendarEventsItems={this.state.calendarEventsItems}/>
         // </View>
-        <GoogleSigninButton
-          style={{width: 48, height: 48}}
-          size={GoogleSigninButton.Size.Icon}
-          color={GoogleSigninButton.Color.Dark}/>
+        <GoogleLogin/>
     );
   }
 }
