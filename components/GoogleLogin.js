@@ -17,14 +17,14 @@ export default class GoogleLogin extends Component {
   }
 
   componentDidMount() {
-    this._setupGoogleSignin();
+    this.setupGoogleSignin();
   }
 
   render() {
     if (!this.state.user) {
       return (
         <View style={styles.container}>
-          <GoogleSigninButton style={{width: 120, height: 44}} color={GoogleSigninButton.Color.Light} size={GoogleSigninButton.Size.Icon} onPress={() => { this._signIn(); }}/>
+          <GoogleSigninButton style={{width: 120, height: 44}} color={GoogleSigninButton.Color.Light} size={GoogleSigninButton.Size.Icon} onPress={() => { this.signIn(); }}/>
         </View>
       );
     }
@@ -35,7 +35,7 @@ export default class GoogleLogin extends Component {
           <Text style={{fontSize: 18, fontWeight: 'bold', marginBottom: 20}}>Welcome {this.state.user.name}</Text>
           <Text>Your email is: {this.state.user.email}</Text>
 
-          <TouchableOpacity onPress={() => {this._signOut(); }}>
+          <TouchableOpacity onPress={() => {this.signOut(); }}>
             <View style={{marginTop: 50}}>
               <Text>Log out</Text>
             </View>
@@ -45,7 +45,7 @@ export default class GoogleLogin extends Component {
     }
   }
 
-  async _setupGoogleSignin() {
+  async setupGoogleSignin() {
     try {
       await GoogleSignin.hasPlayServices({ autoResolve: true });
       await GoogleSignin.configure({
@@ -62,7 +62,7 @@ export default class GoogleLogin extends Component {
     }
   }
 
-  _signIn() {
+signIn() {
     GoogleSignin.signIn()
     .then((user) => {
       console.log(user);
@@ -74,7 +74,7 @@ export default class GoogleLogin extends Component {
     .done();
   }
 
-  _signOut() {
+signOut() {
     GoogleSignin.revokeAccess().then(() => GoogleSignin.signOut()).then(() => {
       this.setState({user: null});
     })
@@ -90,5 +90,3 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
 });
-
-//AppRegistry.registerComponent('GoogleSigninSampleApp', () => GoogleSigninSampleApp);
