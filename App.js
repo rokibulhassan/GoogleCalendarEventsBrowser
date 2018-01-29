@@ -98,7 +98,7 @@ export default class App extends Component {
   fetchCalendarEvents (id) {
     RNCalendarEvents.fetchAllEvents (
       '2017-01-01T19:00:00.000Z',
-      '2017-01-30T19:00:00.000Z',
+      '2018-01-30T19:00:00.000Z',
       [id]
     )
       .then (events => {
@@ -110,7 +110,7 @@ export default class App extends Component {
   }
 
   onLoginFail (error) {
-    console.log ('Google login error ' + error);
+    console.log ('Google login error' + error);
   }
 
   signOut () {
