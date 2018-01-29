@@ -1,5 +1,4 @@
 import React from 'react';
-import {View, Text, Button} from 'react-native';
 import {StackNavigator, TabNavigator} from 'react-navigation';
 
 import LoginScreen from './LoginScreen';
@@ -7,16 +6,20 @@ import EventItemList from "./components/event.item.list";
 
 import calendarEventsListService from './serivces/calendar.events.list.service'
 
+function fetchEvents() {
+  return calendarEventsListService().items
+};
+
 const DailyEventScreen = () => (
-    <EventItemList calendarEventsItems={calendarEventsListService().items}/>
+    <EventItemList events={fetchEvents()}/>
 );
 
 const WeeklyEventScreen = () => (
-    <EventItemList calendarEventsItems={calendarEventsListService().items}/>
+    <EventItemList events={fetchEvents()}/>
 );
 
 const MonthlyEventScreen = () => (
-    <EventItemList calendarEventsItems={calendarEventsListService().items}/>
+    <EventItemList events={fetchEvents()}/>
 );
 
 const MainScreen = TabNavigator({
