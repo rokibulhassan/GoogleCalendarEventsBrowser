@@ -10,7 +10,8 @@ import EventItemList from './components/event.item.list';
 import GoogleLogin from './components/GoogleLogin';
 import calendarEventsListService from './serivces/calendar.events.list.service';
 import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
-import {Text, TouchableOpacity} from 'react-native'
+import {Text, TouchableOpacity} from 'react-native';
+import RNCalendarEvents from 'react-native-calendar-events';
 
 export default class App extends Component {
   constructor (props) {
@@ -74,18 +75,52 @@ export default class App extends Component {
   onLoginSuccess (user) {
     this.setState ({user: user});
     console.log (user);
+    this.fetchAllCalenders();
+  }
+
+  fetchAllCalenders () {
+    RNCalendarEvents.findCalendars ()
+      .then (calendars => {
+        // handle calendars
+        for (let calendar of calendars) {
+          if(calendar.isPrimary){
+              this.fetchCalendarEvents(calendar.id)
+            break;
+          }
+        }
+        console.log(calendars)
+      })
+      .catch (error => {
+        console.log ('Fetch calender error ' + error);
+      });
+  }
+
+  fetchCalendarEvents (id) {
+    RNCalendarEvents.fetchAllEvents (
+      '2017-01-01T19:00:00.000Z',
+      '2017-01-30T19:00:00.000Z',
+      [id]
+    )
+      .then (events => {
+        console.log(events)
+      })
+      .catch (error => {
+        console.log ('Fetch calender event error ' + error);
+      });
   }
 
   onLoginFail (error) {
     console.log ('Google login error ' + error);
   }
 
-  signOut() {
-    GoogleSignin.revokeAccess().then(() => GoogleSignin.signOut()).then(() => {
-      this.setState({user: null});
-      console.log('Google sign out');
-    })
-    .done();
+  signOut () {
+    GoogleSignin.revokeAccess ()
+      .then (() => GoogleSignin.signOut ())
+      .then (() => {
+        this.setState ({user: null});
+        console.log ('Google sign out');
+      })
+      .done ();
   }
 }
 
