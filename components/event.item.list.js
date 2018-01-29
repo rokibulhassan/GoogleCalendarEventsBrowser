@@ -1,33 +1,46 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, ListView} from 'react-native';
 import EventItem from './event.item';
 
 export default class EventItemList extends Component {
 
+  componentWillMount() {
+    this.createDataSource();
+  }
+
+  createDataSource() {
+    const ds = new ListView.DataSource({
+      rowHasChanged: (r1, r2) => r1 !== r2
+    });
+    this.dataSource = ds.cloneWithRows(this.props.calendarEventsItems);
+  }
+
+
+  renderRow(event) {
+    return <EventItem event={event}/>;
+  }
 
   render() {
-
     return (
         <View style={styles.mainContainer}>
           <View style={styles.container}>
             <Text style={styles.title}> Time </Text>
             <Text style={styles.title}> Description </Text>
           </View>
-          {this.props.calendarEventsItems.map((event) =>
-              <EventItem
-                  key={event.id}
-                  event={event}
-              />
-          )}
+          <ListView
+              dataSource={this.dataSource}
+              renderRow={this.renderRow}
+          />
         </View>
+
     );
   }
 }
 
 const styles = StyleSheet.create({
   mainContainer: {
+    flex: 1,
     marginTop: 60,
-    shadowOffset: {width: 0, height: 2},
     justifyContent: 'center',
     alignItems: 'center'
   },
