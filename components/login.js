@@ -1,41 +1,50 @@
 import React, {Component} from 'react';
-import {View, Text} from 'react-native';
-import Card from './card';
-import CardSection from './card.section';
-import Input from './input';
-import Button from './buttons';
+import {View, Text, Button} from 'react-native';
+import { connect } from 'react-redux';
+import { NavigationActions } from 'react-navigation';
 
-export default class Login extends Component {
+class LoginScreen extends Component {
 
-    constructor() {
-        super()
-        this.emailAddress = '';
-        this.password = '';
-    }
-
-    onEmailChange(text) {
-        this.emailAddress = text;
-    }
-
-    onPasswordChange(text) {
-        this.password = text;
-    }
-
-    onButtonPress() {
-        if (this.emailAddress.length > 0 && this.password.length > 0) {
-            this.props.goToMember();
+    componentWillReceiveProps(nextProps) {
+        if (!this.props.authenticated && nextProps.authenticated) {
+          // If we just want to navigate
+          this.props.navigation.navigate('Main');
+    
+          // For resetting to a screen
+          // const resetAction = NavigationActions.reset({
+          //   index: 0,
+          //   actions: [NavigationActions.navigate({ routeName: 'Main' })],
+          // });
+          // this.props.navigation.dispatch(resetAction);
         }
-    }
+      }
+
 
     render() {
+        const {
+            navigation,
+            username,
+            password,
+            authenticated,
+            inProgress,
+            startLogin,
+          } = this.props;
         return (
-            <Card>
-                <CardSection>
-                    <Button onPress={this.onButtonPress.bind(this)}>
-                        Login
-                    </Button>
-                </CardSection>
-            </Card>
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                <Text style={{fontSize: 40, fontWeight: '600', textAlign: 'center', paddingBottom: 30}}>Google Calendar Events Browser</Text>
+                <Button onPress={() => startLogin('foo', 'bar')} title="LOGIN" />
+            </View>
         );
     }
 }
+
+const mapStateToProps = state => ({
+    ...state,
+});
+
+const mapDispatchToProps = dispatch => ({
+startLogin: (username, password) =>
+    dispatch(startLoginAsync(username, password)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
