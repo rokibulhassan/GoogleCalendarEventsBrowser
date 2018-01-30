@@ -4,45 +4,20 @@
  * @flow
  */
 
-import React, {Component} from 'react';
-import {StyleSheet, View} from 'react-native';
-import EventItemList from './components/event.item.list'
-import calendarEventsListService from './serivces/calendar.events.list.service'
+import React, {Component} from "react";
+import { Provider } from 'react-redux';
 
+import { createReduxStore } from './Redux';
+import Navigator from './Navigation';
 
-export default class App extends Component<{}> {
+const store = createReduxStore();
 
-  state = {
-    calendarEvents: {},
-    calendarEventsItems: []
-  }
-
-  componentDidMount = () => {
-    this.setState({
-      calendarEvents: calendarEventsListService(),
-      calendarEventsItems: calendarEventsListService().items,
-    })
-  }
-
+export default class App extends Component {
   render() {
     return (
-        <View style={styles.container}>
-          <EventItemList calendarEventsItems={this.state.calendarEventsItems}/>
-        </View>
+      <Provider store={store}>
+        <Navigator />
+      </Provider>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  }
-});
