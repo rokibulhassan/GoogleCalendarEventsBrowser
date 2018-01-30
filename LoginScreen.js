@@ -1,10 +1,25 @@
 import React, { Component } from 'react';
 import { View, Text, Button } from 'react-native';
 import { connect } from 'react-redux';
-
 import { startLogin, startLoginAsync } from './Redux';
+import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
 
 class LoginScreen extends Component {
+  componentDidMount () {
+    this.setupGoogleSignin ();
+    //this.signOut()
+  }
+
+  signOut () {
+        GoogleSignin.revokeAccess ()
+            .then (() => GoogleSignin.signOut ())
+            .then (() => {
+              this.setState ({user: null});
+              console.log ('Google sign out');
+            })
+            .done ();
+      }
+    
   componentWillReceiveProps(nextProps) {
     if (!this.props.authenticated && nextProps.authenticated) {
       // If we just want to navigate
@@ -19,26 +34,36 @@ class LoginScreen extends Component {
     }
   }
 
+  async setupGoogleSignin () {
+    try {
+      await GoogleSignin.hasPlayServices ({autoResolve: true});
+      await GoogleSignin.configure ({
+        webClientId: '788455155343-160l5akaku5j090stsa4634ecd4r6elj.apps.googleusercontent.com',
+        offlineAccess: false,
+      });
+
+      const user = await GoogleSignin.currentUserAsync ();
+      console.log (user);
+      this.setState ({user});
+    } catch (err) {
+      console.log ('Play services error', err.code, err.message);
+    }
+  }
+
   render() {
     const {
       navigation,
-      username,
-      password,
       authenticated,
       inProgress,
       startLogin,
+      user
     } = this.props;
+
+    console.warn(user)
 
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>Login Screen</Text>
-        <View style={{ alignItems: 'center', justifyContent: 'center' }}>
-          <Text>username: {username}</Text>
-          <Text>password: {password}</Text>
-          <Text>authenticated: {authenticated ? 'YES' : 'NO'}</Text>
-          <Text>inProgress: {inProgress ? 'YES' : 'NO'}</Text>
-        </View>
-
         <Button onPress={() => startLogin('foo', 'bar')} title="LOGIN" />
       </View>
     );
@@ -51,7 +76,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   startLogin: (username, password) =>
-    dispatch(startLoginAsync(username, password)),
+    dispatch(startLoginAsync()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
