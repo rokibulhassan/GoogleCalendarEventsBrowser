@@ -15,7 +15,6 @@ class LoginScreen extends Component {
             .then (() => GoogleSignin.signOut ())
             .then (() => {
               this.setState ({user: null});
-              console.log ('Google sign out');
             })
             .done ();
       }
@@ -43,7 +42,6 @@ class LoginScreen extends Component {
       });
 
       const user = await GoogleSignin.currentUserAsync ();
-      console.log (user);
       this.setState ({user});
     } catch (err) {
       console.log ('Play services error', err.code, err.message);
@@ -59,12 +57,10 @@ class LoginScreen extends Component {
       user
     } = this.props;
 
-    console.warn(user)
-
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>Login Screen</Text>
-        <Button onPress={() => startLogin('foo', 'bar')} title="LOGIN" />
+        <Button onPress={() => startLogin()} title="LOGIN" />
       </View>
     );
   }
@@ -75,7 +71,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  startLogin: (username, password) =>
+  startLogin: () =>
     dispatch(startLoginAsync()),
 });
 

@@ -32,7 +32,6 @@ export default class GoogleLogin extends Component {
       });
 
       const user = await GoogleSignin.currentUserAsync ();
-      console.log (user);
       this.setState ({user});
     } catch (err) {
       console.log ('Play services error', err.code, err.message);

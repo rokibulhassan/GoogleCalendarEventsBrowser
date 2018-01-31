@@ -6,20 +6,17 @@ import EventItemList from "./components/event.item.list";
 
 import calendarEventsListService from './serivces/calendar.events.list.service'
 
-function fetchEvents() {
-  return calendarEventsListService().items
-};
 
 const DailyEventScreen = () => (
-    <EventItemList events={fetchEvents()}/>
+    <EventItemList startDate='2018-01-01T00:00:00.000Z' endDate='2018-01-01T23:00:00.000Z'/>
 );
 
 const WeeklyEventScreen = () => (
-    <EventItemList events={fetchEvents()}/>
+    <EventItemList startDate='2018-01-01T00:00:00.000Z' endDate='2018-01-07T23:00:00.000Z'/>
 );
 
 const MonthlyEventScreen = () => (
-    <EventItemList events={fetchEvents()}/>
+    <EventItemList startDate='2018-01-01T00:00:00.000Z' endDate='2018-02-01T23:00:00.000Z'/>
 );
 
 const MainScreen = TabNavigator({
