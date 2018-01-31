@@ -6,17 +6,10 @@ This is an simple mobile application built with React Native framework [ReactNat
 
 ```
 git clone https://github.com/rokibulhassan/GoogleCalendarEventsBrowser.git
-```
-```
 cd GoogleCalendarEventsBrowser
-```
-```
+
 npm install
-```
-```
 react-native start
-```
-```
 react-native run-android
 ```
 
