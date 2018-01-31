@@ -1,70 +1,33 @@
 {
   "project_info": {
-    "project_number": "788455155343",
-    "project_id": "default-demo-app-bbd4a"
+    "project_number": "836713887465",
+    "project_id": "default-demo-app-628bc"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:788455155343:android:27d689d63f1b7a06",
-        "android_client_info": {
-          "package_name": "com.google.samples.quickstart.signin"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "788455155343-160l5akaku5j090stsa4634ecd4r6elj.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyAXZThWBzKXdwVeVYwQlVCnfShb4VToPdY"
-        },
-        {
-          "current_key": "AIzaSyB6ePMUHmJHcVseTq73Xv8mBhjK7Aa1ikU"
-        }
-      ],
-      "services": {
-        "analytics_service": {
-          "status": 1
-        },
-        "appinvite_service": {
-          "status": 1,
-          "other_platform_oauth_client": []
-        },
-        "ads_service": {
-          "status": 1
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:788455155343:android:dbb1f688ea4931a4",
+        "mobilesdk_app_id": "1:836713887465:android:dbb1f688ea4931a4",
         "android_client_info": {
           "package_name": "com.googlecalendareventsbrowser"
         }
       },
       "oauth_client": [
         {
-          "client_id": "788455155343-ngq2diujnc02iiobjs1mraaa87u0d50t.apps.googleusercontent.com",
+          "client_id": "836713887465-fcbi93134pcce4pqi7r1mammtig9k7it.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.googlecalendareventsbrowser",
-            "certificate_hash": "e2f112f0a975a76a58905065259a21507fe5ef3c"
+            "certificate_hash": "629ac9a54533ba1b24d334495274d3388c23037f"
           }
         },
         {
-          "client_id": "788455155343-160l5akaku5j090stsa4634ecd4r6elj.apps.googleusercontent.com",
+          "client_id": "836713887465-g8pfeu0dlqv01md9utkqk77op2351mhs.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAXZThWBzKXdwVeVYwQlVCnfShb4VToPdY"
-        },
-        {
-          "current_key": "AIzaSyB6ePMUHmJHcVseTq73Xv8mBhjK7Aa1ikU"
+          "current_key": "AIzaSyDCgvq-gpzP-JGudhneV_Gyg44gO4rpxCk"
         }
       ],
       "services": {
