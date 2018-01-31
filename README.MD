@@ -18,11 +18,18 @@ react-native run-android
 ##### Rokibul Hasan ([rokibulhassan](https://github.com/rokibulhassan))
 
 ```
-Initial project setup, Built Components with static data, Redux Configuration, Built Navigation with Redux, Collaborate sign up with redux and calendar event fetching
+Initial project setup
+Built Components with static data
+Redux Configuration
+Built Navigation with Redux
+Collaborate sign up with redux and calendar event fetching
 ```
-##### Nahid Mustofa ([getnahid](https://github.com/getnahid))
+##### Nahid Mustafa ([getnahid](https://github.com/getnahid))
 ```
-Sign Up with google, Fetch data from google calendar, Collaborate sign up with redux and calendar event fetching
+Authentication with google
+Fetch data from google calendar
+Collaborate sign up with redux and calendar event fetching 
+Configure release build 
  ```
  
 ##### Ashraful Karim Miraz ([miraz235](https://github.com/miraz235))
