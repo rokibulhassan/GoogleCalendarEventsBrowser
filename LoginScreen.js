@@ -59,12 +59,10 @@ class LoginScreen extends Component {
       user
     } = this.props;
 
-    console.warn(user)
-
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>Login Screen</Text>
-        <Button onPress={() => startLogin('foo', 'bar')} title="LOGIN" />
+        <Button onPress={() => startLogin()} title="LOGIN" />
       </View>
     );
   }
@@ -75,7 +73,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  startLogin: (username, password) =>
+  startLogin: () =>
     dispatch(startLoginAsync()),
 });
 

@@ -3,12 +3,15 @@ import {StackNavigator, TabNavigator} from 'react-navigation';
 
 import LoginScreen from './LoginScreen';
 import EventItemList from "./components/event.item.list";
+import {fetchEvents,fetchEventsAsync } from './Redux';
+import { connect } from 'react-redux';
 
 import calendarEventsListService from './serivces/calendar.events.list.service'
 
-function fetchEvents() {
-  return calendarEventsListService().items
-};
+// function fetchEvents() {
+//   //return calendarEventsListService().items
+//   dispatch(fetchEventsAsync())
+// };
 
 const DailyEventScreen = () => (
     <EventItemList events={fetchEvents()}/>
@@ -56,4 +59,15 @@ const RootNavigator = StackNavigator({
   },
 });
 
-export default RootNavigator;
+const mapStateToProps = state => ({
+  ...state,
+});
+
+const mapDispatchToProps = dispatch => ({
+  fetchEvents: () =>
+    dispatch(fetchEventsAsync()),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(RootNavigator);
+
+//export default RootNavigator;

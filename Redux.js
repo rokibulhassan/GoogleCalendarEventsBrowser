@@ -3,7 +3,7 @@ import thunk from 'redux-thunk';
 import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
 import RNCalendarEvents from 'react-native-calendar-events';
 
-export const AUTH_ACTION_TYPES = {
+export const ACTION_TYPES = {
   LOGIN_START: 'LOGIN_START',
   LOGIN_SUCCESS: 'LOGIN_SUCCESS',
   LOGIN_FAILURE: 'LOGIN_FAILURE',
@@ -23,11 +23,11 @@ function fetchAllCalenders () {
         // handle calendars
         for (let calendar of calendars) {
           if(calendar.isPrimary){
-            this.fetchCalendarEvents(calendar.id)
+            fetchCalendarEvents(calendar.id)
             break;
           }
         }
-        console.log(calendars)
+        //console.log(calendars)
       })
       .catch (error => {
         console.log ('Fetch calender error ' + error);
@@ -41,9 +41,8 @@ export function fetchCalendarEvents (id) {
       [id]
   )
       .then (events => {
-        console.log(events)
         dispatch ({
-          type: AUTH_ACTION_TYPES.FETCH_CALENDAR_EVENTS,
+          type: ACTION_TYPES.FETCH_CALENDAR_EVENTS,
           payload: {events},
         });
       })
@@ -54,44 +53,70 @@ export function fetchCalendarEvents (id) {
 
 function auth (state = INITIAL_AUTH_STATE, action) {
   switch (action.type) {
-    case AUTH_ACTION_TYPES.LOGIN_START:
+    case ACTION_TYPES.LOGIN_START:
       return Object.assign ({}, state, action.payload, {
         inProgress: true,
       });
-    case AUTH_ACTION_TYPES.LOGIN_SUCCESS:
+    case ACTION_TYPES.LOGIN_SUCCESS:
+      console.log("Login success")
       return Object.assign ({}, state, action.payload, {
         inProgress: false,
         authenticated: true
       });
-    case AUTH_ACTION_TYPES.LOGIN_FAILURE:
+    case ACTION_TYPES.LOGIN_FAILURE:
       return Object.assign ({}, state, {
         authenticated: false,
         inProgress: false,
       });
-    case AUTH_ACTION_TYPES.FETCH_CALENDAR_EVENTS:
+    case ACTION_TYPES.FETCH_CALENDAR_EVENTS:
+      console.log("Calendar events")
       return Object.assign ({}, state, action.payload);
     default:
       return state;
   }
 }
 
-export function startLogin (username, password) {
+export function startLogin () {
   return {
-    type: AUTH_ACTION_TYPES.LOGIN_START,
-    payload: {username, password},
+    type: ACTION_TYPES.LOGIN_START,
   };
 }
+
+export function fetchEvents () {
+  // fetchAllCalenders()
+
+  // return {
+  //   type: ACTION_TYPES.FETCH_CALENDAR_EVENTS,
+  // };
+  return dispatch => {
+    fetchAllCalenders()
+    dispatch ({
+      type: ACTION_TYPES.FETCH_CALENDAR_EVENTS
+    });
+  };
+}
+
+export function fetchEventsAsync () {
+  return dispatch => {
+    dispatch ({
+      type: ACTION_TYPES.FETCH_CALENDAR_EVENTS
+    });
+
+    fetchAllCalenders()
+  };
+}
+
 
 export function startLoginAsync () {
   return dispatch => {
     dispatch ({
-      type: AUTH_ACTION_TYPES.LOGIN_START
+      type: ACTION_TYPES.LOGIN_START
     });
 
     GoogleSignin.signIn ()
       .then (user => {
         dispatch ({
-          type: AUTH_ACTION_TYPES.LOGIN_SUCCESS,
+          type: ACTION_TYPES.LOGIN_SUCCESS,
           payload: {user},
         });
       })
@@ -101,27 +126,14 @@ export function startLoginAsync () {
       .done ();
   };
 
-  //   setTimeout(() => {
-  //     const random = Math.random();
-  //     if (random >= 0.75) {
-  //       dispatch({
-  //         type: AUTH_ACTION_TYPES.LOGIN_FAILURE,
-  //       });
-  //     } else {
-  //       dispatch({
-  //         type: AUTH_ACTION_TYPES.LOGIN_SUCCESS
-  //       });
-  //     }
-  //   }, 1000);
-  // };
 }
 
 export function loginSuccess () {
-  return {type: AUTH_ACTION_TYPES.LOGIN_SUCCESS};
+  return {type: ACTION_TYPES.LOGIN_SUCCESS};
 }
 
 export function loginFailure () {
-  return {type: AUTH_ACTION_TYPES.LOGIN_FAILURE};
+  return {type: ACTION_TYPES.LOGIN_FAILURE};
 }
 
 export function createReduxStore () {
