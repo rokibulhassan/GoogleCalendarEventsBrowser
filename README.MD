@@ -11,6 +11,9 @@ cd GoogleCalendarEventsBrowser
 npm install
 react-native start
 react-native run-android
+
+Note: For running debug builds rename (android/app/google-services_dev.json) as (android/app/google-services.json)
+
 ```
 
 ## Contributors
@@ -26,8 +29,8 @@ Collaborate sign up with redux and calendar event fetching
 ```
 ##### Nahid Mustafa ([getnahid](https://github.com/getnahid))
 ```
-Authentication with google
-Fetch data from google calendar
+Authenticate with google
+Fetch events data from google calendar
 Collaborate sign up with redux and calendar event fetching 
 Configure release build 
  ```
