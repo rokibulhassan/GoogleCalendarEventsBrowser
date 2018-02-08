@@ -3,21 +3,13 @@ import { View, Text, Button } from 'react-native';
 import { connect } from 'react-redux';
 import { startLogin, startLoginAsync } from './Redux';
 import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
+import RNCalendarEvents from 'react-native-calendar-events';
 
 class LoginScreen extends Component {
   componentDidMount () {
     this.setupGoogleSignin ();
-    //this.signOut()
+    RNCalendarEvents.authorizeEventStore()
   }
-
-  signOut () {
-        GoogleSignin.revokeAccess ()
-            .then (() => GoogleSignin.signOut ())
-            .then (() => {
-              this.setState ({user: null});
-            })
-            .done ();
-      }
     
   componentWillReceiveProps(nextProps) {
     if (!this.props.authenticated && nextProps.authenticated) {
@@ -37,7 +29,8 @@ class LoginScreen extends Component {
     try {
       await GoogleSignin.hasPlayServices ({autoResolve: true});
       await GoogleSignin.configure ({
-        webClientId: '788455155343-160l5akaku5j090stsa4634ecd4r6elj.apps.googleusercontent.com',
+        //webClientId: '788455155343-160l5akaku5j090stsa4634ecd4r6elj.apps.googleusercontent.com',
+        //webClientId: '836713887465-0jrqtkj9cubbicqmnk212a4r9m3g8djf.apps.googleusercontent.com',
         offlineAccess: false,
       });
 
@@ -47,6 +40,31 @@ class LoginScreen extends Component {
       console.log ('Play services error', err.code, err.message);
     }
   }
+
+ checkLoginState () {
+  console.log("checkLoginState ")
+    GoogleSignin.currentUserAsync ()
+      .then (user => {
+        if (user == null) {
+          //startLogin()
+          ()=>this.props.startLogin()
+        } else {
+          signOut()
+        }
+      })
+      .done ();
+  }
+  
+ signOut () {
+  console.log("checkLoginState "+user)
+        GoogleSignin.revokeAccess ()
+            .then (() => GoogleSignin.signOut ())
+            .then (() => {
+              //startLogin()
+              ()=>this.props.startLogin()
+            })
+            .done ();
+      }
 
   render() {
     const {
@@ -60,7 +78,7 @@ class LoginScreen extends Component {
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text>Login Screen</Text>
-        <Button onPress={() => startLogin()} title="LOGIN" />
+        <Button onPress={()=> startLogin()} title="LOGIN" />
       </View>
     );
   }

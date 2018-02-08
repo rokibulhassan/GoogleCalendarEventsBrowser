@@ -22,6 +22,10 @@ export default class EventItemList extends Component {
     this.fetchEvents();
   }
 
+  componentDidUpdate(){
+    console.log("componentDidUpdate")
+  }
+
  fetchEvents() {
     RNCalendarEvents.findCalendars ()
         .then (calendars => {
@@ -40,6 +44,9 @@ export default class EventItemList extends Component {
   }
   
  fetchCalendarEvents(id) {
+    console.log("start time "+this.props.startDate)
+    console.log("end time "+this.props.endDate)
+
     eventList = [];
     RNCalendarEvents.fetchAllEvents (
         this.props.startDate,
@@ -47,6 +54,7 @@ export default class EventItemList extends Component {
         [id]
     )
         .then (events => {
+          console.log("events "+JSON.stringify(events))
           this.setState({
               events: events
           }, () => {

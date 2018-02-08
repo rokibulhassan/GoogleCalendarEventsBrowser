@@ -13,7 +13,7 @@
       },
       "oauth_client": [
         {
-          "client_id": "836713887465-fcbi93134pcce4pqi7r1mammtig9k7it.apps.googleusercontent.com",
+          "client_id": "836713887465-0jrqtkj9cubbicqmnk212a4r9m3g8djf.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.googlecalendareventsbrowser",
@@ -21,13 +21,13 @@
           }
         },
         {
-          "client_id": "836713887465-g8pfeu0dlqv01md9utkqk77op2351mhs.apps.googleusercontent.com",
+          "client_id": "836713887465-987uk8l4cg4fdjvn8g76m69lib9b5nko.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDCgvq-gpzP-JGudhneV_Gyg44gO4rpxCk"
+          "current_key": "AIzaSyAMjf6URYgWWyEfdWr8crSU4IcRxRWdYiU"
         }
       ],
       "services": {

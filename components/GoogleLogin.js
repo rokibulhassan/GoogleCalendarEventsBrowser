@@ -5,7 +5,27 @@ import {GoogleSignin, GoogleSigninButton} from 'react-native-google-signin';
 
 export default class GoogleLogin extends Component {
   componentDidMount () {
-    this.setupGoogleSignin ();
+    this.setupGoogleSignin()
+  }
+
+  checkLoginState () {
+    GoogleSignin.currentUserAsync ()
+      .then (user => {
+        if (user == null) {
+          
+        } else {
+          this.signout()
+        }
+      })
+      .done ();
+  }
+
+  signout () {
+    GoogleSignin.signOut ()
+      .then (() => {
+        console.log ('out');
+      })
+      .catch (err => {});
   }
 
   render () {
@@ -33,6 +53,7 @@ export default class GoogleLogin extends Component {
 
       const user = await GoogleSignin.currentUserAsync ();
       this.setState ({user});
+      console.log ('setupGoogleSignin');
     } catch (err) {
       console.log ('Play services error', err.code, err.message);
     }
@@ -41,9 +62,11 @@ export default class GoogleLogin extends Component {
   signIn () {
     GoogleSignin.signIn ()
       .then (user => {
+        console.log ('onLoginSuccess',user);
         this.props.onLoginSuccess (user);
       })
       .catch (err => {
+        console.log ('onLoginFail',err);
         this.props.onLoginFail (err);
       })
       .done ();
